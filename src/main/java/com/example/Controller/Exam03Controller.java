@@ -23,11 +23,13 @@ public class Exam03Controller {
 		Integer num4 = Integer.parseInt(num1);
 		Integer num5 = Integer.parseInt(num2);
 		Integer num6 = Integer.parseInt(num3);
-		application.setAttribute("num4", num4);
-		application.setAttribute("num5", num5);
-		application.setAttribute("num6", num6);
+		
+		Integer withoutTax = num4+num5+num6;
+		Integer withTax = (int) ((num4+num5+num6)*1.1);
+		application.setAttribute("withTax", withTax);
+		application.setAttribute("withoutTax", withoutTax);
 
 		return "exam03-result";
 	}
-
+	
 }
