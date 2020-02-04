@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,22 +18,19 @@ public class Exam02Controller {
 		return "exam02";
 	}
 	
-	@RequestMapping("/add")
-	public String add(Model model,String num1,String num2) {
-		Integer num3 = Integer.parseInt(num1);
-		Integer num4 = Integer.parseInt(num2);
-		Integer num5 = num3+num4;
+	@RequestMapping("/input")
+	public String input(Integer num1,Integer num2) {
+		session.setAttribute("num1", num1);
+		session.setAttribute("num2", num2);
+		Integer num3 = num1+num2;
+		session.setAttribute("num3", num3);
 		
-		session.setAttribute("num3",num3);
-		session.setAttribute("num4",num4);
-		session.setAttribute("num5",num5);
-		
-		return "exam02_result";
+		return "exam02-result";
 	}
 	
-	@RequestMapping("/result")
-	public String toResult() {
-		return "exam02_result2";
+	@RequestMapping("/input2")
+	public String input2() {
+		return "exam02-result2";
 	}
 
 }
