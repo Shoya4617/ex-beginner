@@ -1,4 +1,4 @@
-package com.example.Controller;
+package com.example.controller;
 
 import javax.servlet.ServletContext;
 
@@ -20,12 +20,12 @@ public class Exam03Controller {
 	
 	@RequestMapping("/input")
 	public String input(String num1,String num2,String num3){
-		Integer num4 = Integer.parseInt(num1);
-		Integer num5 = Integer.parseInt(num2);
-		Integer num6 = Integer.parseInt(num3);
+		Integer intNum1 = Integer.parseInt(num1);
+		Integer intNum2 = Integer.parseInt(num2);
+		Integer intNum3 = Integer.parseInt(num3);
 		
-		Integer withoutTax = num4+num5+num6;
-		Integer withTax = (int) ((num4+num5+num6)*1.1);
+		Integer withoutTax = intNum1+intNum2+intNum3;
+		Integer withTax = (int) ((intNum1+intNum2+intNum3)*1.1);
 		application.setAttribute("withTax", withTax);
 		application.setAttribute("withoutTax", withoutTax);
 
