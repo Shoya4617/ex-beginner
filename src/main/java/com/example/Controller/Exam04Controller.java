@@ -1,13 +1,18 @@
 package com.example.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.User;
 import com.example.form.UserForm;
 
 @Controller
-@RequestMapping("/04")
+@RequestMapping("/ex04")
 public class Exam04Controller {
 	
 	@ModelAttribute
@@ -17,6 +22,21 @@ public class Exam04Controller {
 
 	@RequestMapping("")
 	public String index() {
+
 		return "exam04";
+	}
+	
+	@RequestMapping("/input")
+	public String input(@Validated UserForm form,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			return index();
+		}
+		
+		User user = new User();
+		Integer age = Integer.parseInt(form.getAge());
+		user.setAge(age);
+		BeanUtils.copyProperties(form, user);
+		model.addAttribute("user",user);
+		return "exam04-result";
 	}
 }
