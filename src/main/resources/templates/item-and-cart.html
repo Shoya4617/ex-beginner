@@ -5,6 +5,45 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h2>商品一覧</h2>
+<form action="" th:action="@{/shopping_cart/in_cart}" method="post">
+<table border=1>
 
+<tr>
+<th>商品名</th>
+<th>価格</th>
+<th></th>
+</tr>
+
+<span th:each="item:${application.itemList}">
+	<tr><td th:text="${item.name}"></td>
+		<td><span th:text="${#numbers.formatInteger(item.price,1,'COMMA')}"></span><span> 円</span></td>
+		<td><a th:href="@{'/shopping_cart/in_cart?id='+${application.itemList.indexOf(item)}}">カートへ</a></td>
+	</tr>
+</span>
+</table>
+</form>
+
+<h2>ショッピングカート</h2>
+合計金額：<span th:text="${#numbers.formatInteger(price,1,'COMMA')}"></span>円<br>
+<a th:href="@{/shopping_cart/delete_all}">全て削除する</a>
+<form action="" th:action="@{/shopping_cart/cart_delete}" method="post">
+<table border=1>
+
+<tr>
+<th>商品名</th>
+<th>価格</th>
+<th></th>
+</tr>
+
+<span th:each="cart:${session.cartList}">
+	<tr><td th:text="${cart.name}"></td>
+		<td><span th:text="${#numbers.formatInteger(cart.price,1,'COMMA')}"></span><span> 円</span></td>
+		<td><a th:href="@{'/shopping_cart/cart_delete?id='+${session.cartList.indexOf(cart)}}">削除</a></td>
+	</tr>
+</span>
+
+</table>
+</form>
 </body>
 </html>
